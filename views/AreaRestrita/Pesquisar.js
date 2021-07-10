@@ -6,9 +6,9 @@ import config from '../../config/config';
 import * as Location from 'expo-location';
 import Geocoder from 'react-native-geocoding';
 
-import MenuAreaRestrita from '../../assets/Components/MenuAreaRestrita';
+import MenuPrincipal from '../../assets/Components/MenuPrincipal';
 
-export default function Edicao({navigation}){
+export default function Pesquisar({navigation}){
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [product, setProduct] = useState(null);
@@ -92,7 +92,7 @@ export default function Edicao({navigation}){
     return(
 
       <View style={[css.container,css.containerTop]}>
-      <MenuAreaRestrita title='Edicão' navigation={navigation}/>
+     
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined :value=> handleBarCodeScanned(value)}
         style={[css.qr__code(displayQr)]}

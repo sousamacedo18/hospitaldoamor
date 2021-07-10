@@ -39,7 +39,7 @@ const logincss = StyleSheet.create({
     },
     login__button:{
         padding:12,
-        backgroundColor:"#191970",
+        backgroundColor:"#1e90ff",
         alignSelf:"center",
         
         borderRadius:5,
@@ -69,7 +69,8 @@ const logincss = StyleSheet.create({
     },
     login__textLogo1:{
         fontWeight:"bold",
-        fontSize:30,
+        fontSize:16,
+        color:"#4b0082",
         fontStyle:"italic"
 
     },

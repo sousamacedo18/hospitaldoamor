@@ -46,9 +46,9 @@ export default function AreaRestrita({Navigation}){
         name="Edicao" 
         component={Edicao}
         options={{
-          title:"Edição",
+          title:"Pesquisar",
           tabBarIcon:()=>(
-            <Icon name="edit" size={20} color="#999" />
+            <Icon name="search" size={20} color="#999" />
             
           )
         }}         

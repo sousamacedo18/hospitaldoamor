@@ -1,33 +1,74 @@
 import React, { useState,useEffect } from 'react';
-import { View, TextInput,Text, TouchableOpacity,Image, Button,FlatList} from 'react-native';
-import css from '../../assets/css/Css';
+import { 
+    View, 
+    TextInput,
+    Text,
+    TouchableOpacity,
+    Image,StyleSheet, 
+    Button} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';  
+import css from '../../assets/css/Cadastro';
+import Modal from '../../assets/Components/Modal';
 import config from '../../config/config';
 import * as Sharing from 'expo-sharing';
 import * as FileSystem from 'expo-file-system';
 import MenuAreaRestrita from '../../assets/Components/MenuAreaRestrita';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
+import api from '../../services/api';
 
 
 export default function Cadastro({navigation}){
    const address=config.origin;
    const[code,setCode]=useState(null);
-   const[user,setUser]=useState(null);
+   const[user,setUser]=useState();
+   const[und,setUnd]=useState();
    const[product,setProduct]=useState(null);
+   const[idcli,setIdcli]=useState(null);
    const[response,setResponse]=useState(null);
-
-
-   useEffect(()=>{
-        getUser();
+   const[idtipo,setIdTipo]=useState();
+   const [tipo,setTipo]=useState("Tipo de Produto");
+   const data = {
+       codigo:code,
+       idcli:idcli,
+       idund:und,
+       descricao:product,
+       idtipo:idtipo,
+       idusu:user
+   }
+  
+  useEffect(()=>{
+       getSessao()
       
-   },[]);
+  },[]);
+  
+   useEffect(()=>{
+        setIdcli(idcli)
+      
+   },[idcli]);
+
+
 // Gerar código Randomico
 useEffect(()=>{
     randomCode();
     setProduct(null);
-},[response]);
+    setIdcli(null);
+    setTipo("Tipo de Produto");
 
+    
+},[response]);
+async function getSessao(){
+    let response=await AsyncStorage.getItem('userData');
+    let json=await JSON.parse(response);
+    setUser(json.idusu);
+    setUnd(json.idund);
+    
+}
+const buscar = async (chave)=>{
+    const valor = await AsyncStorage.getItem(chave); 
+    //let json=await JSON.parse(valor);
+    
+    return valor;
+}
 async function randomCode(){
     let result           = '';
     let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -49,7 +90,19 @@ async function getUser(){
 //enviar formulario 
 
 
+async function salvarForm(){
+    getSessao();
+    console.log(data);
+   
+    await api.post('/cadastrar',data)
+        .then(response => { 
+            setResponse(response.data);
+            console.log(response.data);
+           //return response; 
+        })
+        .catch(error => console.log(error))
 
+}
 
 async function sendForm(){
     let response = await fetch(`${config.urlRoot}create`,{
@@ -85,9 +138,38 @@ async function shareQR()
 }
     return(
 
-        <View style={[css.container,css.containerTop]}>
-                <MenuAreaRestrita title='Cadastro' navigation={navigation}/>
-                {response &&(
+        <View style={[css.container]}>
+               
+
+                <View style={[css.container2]}>
+
+                <View style={[css.profile__formRec]} >
+                <View>
+                        <Text>Cadastrar Produto</Text>
+                    </View>
+                    <TextInput style={[css.cadastro__inputText]}
+                    placeholder='ID PACIENTE'
+                    onChangeText={text => setIdcli(text)}
+                    value={idcli}
+
+                     />
+                <TextInput style={[css.cadastro__inputText]}
+                    placeholder='Descrição do Produto/Serviço'
+                    onChangeText={text => setProduct(text)}
+                    value={product}
+
+                     />
+                     <Modal
+                       setProps={setIdTipo} 
+                     />
+                
+                 <TouchableOpacity 
+                    style={[css.cadastro__button]}
+                    onPress={()=>{salvarForm()}}
+                    >
+                        <Text style={[css.cadastro_buttonText]}>Cadastrar</Text>
+                    </TouchableOpacity>
+                    {response &&(
                     <View>
                             <Image source={{uri:response, height:180, width:180}}
                             />
@@ -95,32 +177,22 @@ async function shareQR()
                    </View>
                 )
 
-                }
-                <View style={[css.profile__formRec]} >
-             
-                <TextInput style={[css.cadastro__inputText]}
-                    placeholder='Nome do Produto'
-                    onChangeText={text => setProduct(text)}
-                    value={product}
-
-                     />
+                }     
+                    
                 </View>
-                <View>
-                    <TouchableOpacity 
-                    style={[css.cadastro__button]}
-                    onPress={()=>{sendForm()}}
-                    >
-                        <Text>Cadastrar</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity 
-                    style={[css.cadastro__button]}
+
+
+
+                </View>
+                <View style={[css.container2]}>
+                <TouchableOpacity   
+                    style={[css.cadastro__button_listar]}
                     onPress={()=>{navigation.navigate('ListProduct')}}
                     >
-                        <Text>Listar</Text>
+                        <Text style={[css.cadastro_buttonText]}>Listar</Text>
                     </TouchableOpacity>
 
                 </View>
-                
      
         </View> 
             
