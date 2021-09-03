@@ -21,11 +21,7 @@ const Css = StyleSheet.create({
         backgroundColor:"#fff",
         alignItems:"center",
         justifyContent:"center",
-       
-    },
-    containerTop:{
-
-      
+        height:"100%"
        
     },
     container2:{
@@ -194,17 +190,7 @@ const Css = StyleSheet.create({
       profile__formRec:{
           marginTop:20,
       },
-      qr__code:(display='flex')=>({
-            width:'100%',
-            height:'100%',
-            background:'#000',
-            justifyContent:'center',
-            display: display
-      }),
-      qr__form:(display='none')=>({
-                width:'100%',
-                display:display
-      })
+
 
 });
 

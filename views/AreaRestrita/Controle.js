@@ -7,66 +7,59 @@ import {
     Image,StyleSheet, 
     Button} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';  
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import config from '../../config/config';
 import * as Sharing from 'expo-sharing';
 import * as FileSystem from 'expo-file-system';
-import MenuAreaRestrita from '../../assets/Components/MenuAreaRestrita';
-import MenuPrincipal from '../../assets/Components/MenuPrincipal';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../services/api';
 
 
 
 export default function Controle({navigation }){
-
+    async function logout(){
+        await AsyncStorage.clear();
+        navigation.navigate('Login');
+            }
     return(
       
-        <View style={[estilo.conteiner]}> 
-        <MenuPrincipal/>
-        <View>
-            <Text style={[estilo.texttitulo]}>App de Controle de Processos</Text></View>
+        <View style={[estilo.conteiner]}>
+
+
+          <View style={[estilo.containerTop]} >
+          <View style={[estilo.buttonExit]}>
+            <TouchableOpacity
+            onPress={()=>{logout()}}
+            >
+            
+            <MaterialIcons
+                            raised
+                            name='exit-to-app'
+                            type='MaterialIcons'
+                            color='#1e90ff'
+                            size={30}
+                            
+             />               
+            </TouchableOpacity>
+
+            </View>
+            <View style={[estilo.logoTop]}>
+            <Image source={require('../../assets/img/logo5.png')}
+             
+             style={{ width: 330, height: 150,resizeMode:"contain" }}
+            />
+               {/* <Text style={[css.login__textLogo1]}>Registro de Processos</Text> */}
+               
+            </View>
+
+            </View>
+
         <View style={[estilo.conteiner__centro]}>
 
+
             <View style={[estilo.conteiner2]}>
-            <TouchableOpacity
-             style={[estilo.card]}>
-            <Icon
-                            raised
-                            name='id-badge'
-                            type='font-awesome'
-                            color='#f08080'
-                            size={30}
-                            />
-                            <Text style={[]}>Perfil</Text>
-                    
-            </TouchableOpacity>
-            <TouchableOpacity
-            style={[estilo.card]}>
-            <Icon
-                            raised
-                            name='users'
-                            type='font-awesome'
-                            color='#f08080'
-                            size={30}
-                            />
-                    <Text style={[]}>Usuários</Text>
-                </TouchableOpacity>
-        </View>
-            <View style={[estilo.conteiner2]}>
-            <TouchableOpacity
-             style={[estilo.card]}
-             onPress={()=>{navigation.navigate('Cadastro')}}
-             >
-            <Icon
-                            raised
-                            name='edit'
-                            type='font-awesome'
-                            color='#f08080'
-                            size={30}
-                            />
-                            <Text style={[]}>Cadastro Produto</Text>
-                    
-            </TouchableOpacity>
+
                 <TouchableOpacity
                  style={[estilo.card]}
                  onPress={()=>{navigation.navigate('Pesquisar')}}
@@ -75,15 +68,13 @@ export default function Controle({navigation }){
                             raised
                             name='qrcode'
                             type='font-awesome'
-                            color='#f08080'
+                            color='white'
                             size={30}
                             
              />
-                     <Text style={[]}>Pesquisar</Text>     
+                     <Text style={[estilo.titulocard]}>Pesquisar</Text>     
                 </TouchableOpacity>
-        </View>
-            <View style={[estilo.conteiner2]}>
-            <TouchableOpacity
+                <TouchableOpacity
              style={[estilo.card]}
              onPress={()=>{navigation.navigate('ListProduct')}}
              >
@@ -91,41 +82,15 @@ export default function Controle({navigation }){
                             raised
                             name='list-ul'
                             type='font-awesome'
-                            color='#f08080'
+                            color='white'
                             size={30}
                             />
-                            <Text style={[]}>Produtos</Text>
+                            <Text style={[estilo.titulocard]}>Produtos</Text>
                     
             </TouchableOpacity>
-                <TouchableOpacity
-                 style={[estilo.card]}
-                 onPress={()=>{navigation.navigate('Pesquisar')}}
-                 >
-            <Icon
-                            raised
-                            name='print'
-                            type='font-awesome'
-                            color='#f08080'
-                            size={30}
-                            />
-                     <Text style={[]}>Relatórios</Text>     
-                </TouchableOpacity>
         </View>
             <View style={[estilo.conteiner2]}>
-            <TouchableOpacity
-             style={[estilo.card]}
-             onPress={()=>{navigation.navigate('Cadastro')}}
-             >
-            <Icon
-                            raised
-                            name='hourglass'
-                            type='font-awesome'
-                            color='#f08080'
-                            size={30}
-                            />
-                            <Text style={[]}>Etapas</Text>
-                    
-            </TouchableOpacity>
+
                 <TouchableOpacity
                  style={[estilo.card]}
                  onPress={()=>{navigation.navigate('Pesquisar')}}
@@ -134,12 +99,29 @@ export default function Controle({navigation }){
                             raised
                             name='print'
                             type='font-awesome'
-                            color='#f08080'
+                            color='white'
                             size={30}
                             />
-                     <Text style={[]}>Relatórios</Text>     
+                     <Text style={[estilo.titulocard]}>Relatórios</Text>     
                 </TouchableOpacity>
+                <TouchableOpacity
+            
+            style={[estilo.card]}
+            onPress={()=>{navigation.navigate('ListUsuarios')}}
+            >
+                
+               
+            <Icon
+                            raised
+                            name='users'
+                            type='font-awesome'
+                            color='white'
+                            size={30}
+                            />
+                    <Text style={[estilo.titulocard]}>Usuários</Text>
+         </TouchableOpacity>
         </View>
+
 
         </View>
     </View>
@@ -148,31 +130,50 @@ export default function Controle({navigation }){
 }
 const estilo = StyleSheet.create({
     conteiner:{
-      marginBottom:10,
-      
-  
+
+     flexDirection:"column",
+     justifyContent:"space-between",
+     height:"100%",
+     backgroundColor:"white",
    
-      
-     alignItems:"center",
-   
+    },
+    containerTop:{
+        backgroundColor:"white",
+        justifyContent:"center",
+       
+        width:"100%",
+        flex:1,
+    },
+    buttonExit:{
+                alignItems:"flex-end",
+                marginRight:25
+    },
+    logoTop:{
+            alignItems:"center",
+            
     },
     conteiner__centro:{
  
-      marginTop:10,
-      
-      padding:5,
-  
-     alignItems:"center",
+        backgroundColor:"white",
+        justifyContent:"flex-start",
+        alignItems:"center",
+        width:"100%",
+        flex:1,
+
+     
    
     },
     conteiner2:{
+       
         flexDirection:"row"
     },
     card:{
-        
+
+
         borderWidth:1,
+        borderColor:"#1e90ff",
         alignItems:"center",
-        borderColor:"#00a3e9",
+        backgroundColor:"#1e90ff",
         borderRadius:5,
         padding:5,
         width:"40%",
@@ -213,5 +214,12 @@ const estilo = StyleSheet.create({
         fontWeight:"bold",
         fontSize:16,
         color:"#00008b"
+    },
+    titulocard:{
+      
+        textAlign:'center',
+     
+        fontSize:12,
+        color:"white"
     }
 });

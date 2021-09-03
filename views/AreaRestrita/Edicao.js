@@ -83,8 +83,8 @@ export default function Edicao({navigation}){
   }
 
   async function abrirdetalhes(){
-       navigation.navigate('DetalhesProduto',{
-      id:code
+       navigation.navigate('Fluxo',{
+      codigo:code
   })
 }
 

@@ -41,7 +41,6 @@ const logincss = StyleSheet.create({
         padding:12,
         backgroundColor:"#1e90ff",
         alignSelf:"center",
-        
         borderRadius:5,
         width:"100%"
         

@@ -1,25 +1,62 @@
 import React, { useState } from 'react';
-import { Text, View ,TouchableOpacity} from 'react-native';
+import { Text, View ,TouchableOpacity,StyleSheet} from 'react-native';
 import css from "../css/Css";
-import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Feather from 'react-native-vector-icons/Feather';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import{useNavigation,useRoute} from '@react-navigation/native';
+
 export default function MenuAreaRestrita(props){
-    async function logout(){
-        await AsyncStorage.removeItem();
-        props.navigation.navigate('Login');
+    const route = useRoute();
+  
+   const navigation = useNavigation();
+
+     function voltarControle(){
+       //navigation.goBack('controle');
+      navigation.navigate('Controle');
+}
+
+    async function retornar(){
+        await AsyncStorage.clear;
+       //navigation.goBack('controle');
+       navigation.goBack()
+    
 }
 
     return(
 
-        <View style={[css.area__menu]}>
-            <TouchableOpacity style={[css.button__home2]} onPress={()=>props.navigation.navigate('AreaRestrita')}>
-            <Icon name="home" size={20} color="#999" />
-            </TouchableOpacity>
-            <Text style={[css.area__title]}>{props.title}</Text>
-            <TouchableOpacity style={[css.button__logout]} onPress={()=>logout()}>
-            <Icon name="sign-out" size={20} color="#999" />
-            </TouchableOpacity>           
+        <View style={[estilo.area__menu]}>
+                    <TouchableOpacity onPress={()=>retornar()}>
+                        <Feather name="arrow-left" size={24} color="white" />
+                    </TouchableOpacity>   
+                                    <Text style={[estilo.title]}>{props.title}</Text>
+                    <TouchableOpacity  onPress={()=>{voltarControle()}}>
+                        <FontAwesome name="home" size={24} color="white" />
+                    </TouchableOpacity>
+     
+        
         </View> 
             
     ); 
 }
+
+const estilo = StyleSheet.create({
+    area__menu:{
+        flexDirection:'row',
+        marginTop:0,
+        paddingBottom:20,
+        paddingLeft:15,
+        paddingRight:15,
+        height:100,
+        backgroundColor:'#91d1f5',
+        alignItems:'flex-end',
+        justifyContent:'space-between'
+},
+title:{
+    
+    fontWeight:'bold',
+    fontSize:20,
+    color:'#fff',
+    textAlign:'center'
+}
+});

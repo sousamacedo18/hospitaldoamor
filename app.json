@@ -6,8 +6,8 @@
     "orientation": "portrait",
     "icon": "./assets/img/icon.png",
     "splash": {
-      "image": "./assets/img/splash.png",
-      "resizeMode": "cover",
+      "image": "./assets/img/hospital-amor-logo-01.png",
+      "resizeMode": "contain",
       "backgroundColor": "#000"
     },
     "updates": {

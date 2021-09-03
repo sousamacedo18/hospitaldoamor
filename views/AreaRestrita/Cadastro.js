@@ -138,22 +138,20 @@ async function shareQR()
 }
     return(
 
-        <View style={[css.container]}>
-               
+        <View style={[estilo.container]}>
+            <MenuAreaRestrita title="Cadastro de Produto" />
 
-                <View style={[css.container2]}>
+                <View style={[estilo.containerCentral]}>
 
                 <View style={[css.profile__formRec]} >
-                <View>
-                        <Text>Cadastrar Produto</Text>
-                    </View>
-                    <TextInput style={[css.cadastro__inputText]}
+
+                    <TextInput style={[estilo.textCadastro]}
                     placeholder='ID PACIENTE'
                     onChangeText={text => setIdcli(text)}
                     value={idcli}
 
                      />
-                <TextInput style={[css.cadastro__inputText]}
+                <TextInput style={[estilo.textCadastro]}
                     placeholder='Descrição do Produto/Serviço'
                     onChangeText={text => setProduct(text)}
                     value={product}
@@ -181,20 +179,43 @@ async function shareQR()
                     
                 </View>
 
-
-
-                </View>
-                <View style={[css.container2]}>
                 <TouchableOpacity   
                     style={[css.cadastro__button_listar]}
-                    onPress={()=>{navigation.navigate('ListProduct')}}
+                    onPress={()=>{navigation.goBack()}}
                     >
                         <Text style={[css.cadastro_buttonText]}>Listar</Text>
                     </TouchableOpacity>
 
                 </View>
+            
+ 
+
+                
      
         </View> 
             
     ); 
 }
+const estilo = StyleSheet.create({
+container:{
+    width:"100%"
+},
+containerCentral:{
+
+    marginLeft:10,
+    marginRight:10,
+   
+},
+textCadastro:{
+    flexDirection:"row",
+    justifyContent:"space-between",
+    fontSize:14,
+    color:"#333",
+    backgroundColor:'#fff',
+    borderRadius:5,
+    margin:5,
+    padding:10,
+    borderWidth: 0.5,
+    borderColor: "#fff",
+}
+});

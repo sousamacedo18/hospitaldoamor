@@ -39,15 +39,13 @@ export default function ({setProps,value}){
     );
   };
   const Item = ({ item, onPress, backgroundColor, textColor }) => (
-    <TouchableOpacity onPress={onPress} style={[estilo.button_escolha]}>
-      <Text style={[estilo.text_button_escolha]}>{item.nometipo}</Text>
-      <Icon
-        raised
-        name='check'
-        type='font-awesome'
-        color='#f08080'
-        size={18} />
+
+    <TouchableOpacity onPress={onPress} style={[estilo.card]} >
+      <Text style={{fontSize:14}} >{item.nometipo}</Text>
+
     </TouchableOpacity>
+    
+
   );
 
   
@@ -72,19 +70,19 @@ export default function ({setProps,value}){
        
            >
              <View style={estilo.modal}>
-            <View style={estilo.conteiner_retorno}>
-                  <TouchableOpacity 
-                  
-                          style={estilo.button_retorno}
-                          onPress={()=>{setVisible(false)}}
-                  >
-                    <Icon name="times" size={20} color="#ff0000" />
-                      
-                  </TouchableOpacity>
-            </View>
-          <View style={estilo.titulo}>
-            <Text  style={estilo.tituloText}>Escolher o tipo produto</Text>
-          </View>
+             <View style={[estilo.headerModal]}>
+                    <TouchableOpacity
+                    onPress={()=>{setVisible(false)}}
+                    >
+                    <Icon name="angle-left" size={24} color="#000" />
+                    </TouchableOpacity>
+                    <Text style={[estilo.textHeader]}>Escolher o tipo produto</Text>
+                    <TouchableOpacity
+                    onPress={()=>{setVisible(false)}}
+                    >
+                    <Icon name="close" size={24} color="#ff0000" />
+                    </TouchableOpacity>
+                    </View>
             <FlatList
                     data={data}
                     renderItem={renderItem}
@@ -92,14 +90,7 @@ export default function ({setProps,value}){
                    
                     extraData={selectedId}
                   />
-               
-
-            <TouchableOpacity 
-                    style={[estilo.button_fechar]}
-                    onPress={()=>{setVisible(false)}}
-            >
-                <Text style={estilo.text_button_fechar}>Fechar</Text>
-            </TouchableOpacity>
+              
 
             </View>
 
@@ -119,10 +110,41 @@ export default function ({setProps,value}){
 const estilo = StyleSheet.create({
   modal:{
     backgroundColor:"#dcdcdc",
-    margin:20,
-    padding:20,
-   borderRadius:5,
+    height:"100%",
+    width:"100%",
+    borderRadius:5,
     elevation:10
+  },
+  headerModal:{
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems:"center",
+    padding:10,
+    marginBottom:10,
+    height:60,
+    backgroundColor:"#fff",
+ },
+ textHeader:{
+  fontSize:16,
+  color:"blue"
+ },
+ card:{
+  flexDirection:"row",
+  height:50,
+  justifyContent:"space-between",
+  alignItems:"center",
+  borderRadius:6,
+  elevation:3,
+  backgroundColor:'#fff',
+  shadowOffset:{width:1, height:1},
+  shadowColor:'#333',
+  shadowOpacity:0.3,
+  shadowRadius:2,
+  marginHorizontal:4,
+  marginVertical:6,
+  padding:10,
+
+  
   },
   conteiner_retorno:{
     marginBottom:15,
@@ -133,17 +155,17 @@ const estilo = StyleSheet.create({
   },
   button_escolha:{
     flexDirection:"row",
-    borderWidth:1,
-    borderTopRightRadius:5,
-    borderBottomRightRadius:5,
-    borderColor:"#afeeee",
-    marginTop:10,
-    height:50,
-    backgroundColor:"#fdf5e6",
-    alignItems:"center",
     justifyContent:"space-between",
-    paddingRight:10,
-    paddingLeft:10,
+    borderRadius:6,
+    elevation:3,
+    backgroundColor:'#fff',
+    shadowOffset:{width:1, height:1},
+    shadowColor:'#333',
+    shadowOpacity:0.3,
+    shadowRadius:2,
+    marginHorizontal:4,
+    marginVertical:6,
+    padding:10
 
   },
   button_fechar:{
@@ -169,14 +191,14 @@ const estilo = StyleSheet.create({
   button_abrir:{
     flexDirection:"row",
     justifyContent:"space-between",
+    fontSize:14,
+    color:"#333",
+    backgroundColor:'#fff',
+    borderRadius:5,
+    margin:5,
     padding:10,
-    backgroundColor:"white",
-    width:"97%",
-    borderRadius:6,
-    marginTop:5,
-    marginLeft:5,
-    borderWidth:1,
-    borderColor:"#c0c0c0",
+    borderWidth: 0.5,
+    borderColor: "#fff",
     
   },
   text_button_abrir:{
