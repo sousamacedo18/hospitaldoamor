@@ -494,15 +494,11 @@ async function buscarproduto(codigo){
                                                     </Text>
                                       </View>
       
- 
-
                                     </View>
          
                                 )}
      />
-        </View>
-
-           
+        </View> 
       )}
       </View>
             </View>
