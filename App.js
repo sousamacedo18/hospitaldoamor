@@ -161,8 +161,7 @@ export default function App() {
         //     headerTintColor:'#191970',
         //     headerTitleStyle:{fontWeight:'bold', alignSelf:'center'}     
         //   }
-          
-         
+        
           />
         <Stack.Screen 
             name="Pesquisar"
