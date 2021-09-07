@@ -112,16 +112,11 @@ export default function App() {
                     
         />
         <Stack.Screen 
+
                     name="Fluxo"
                     component={Fluxo}
                     options={{headerShown:false}} 
-                    // options ={{
-                    //   title:"Etapa",
-                    //   headerStyle:{backgroundColor:'#add8e6'},
-                    //   headerTintColor:'#191970',
-                    //   headerTitleStyle:{fontWeight:'bold', alignSelf:'center'}
-            
-                    // }}
+  
         />
         <Stack.Screen name="AreaRestrita" options={{headerShown:false}} component={AreaRestrita} />
         <Stack.Screen name="Controle" options={{headerShown:false}} component={Controle} />
