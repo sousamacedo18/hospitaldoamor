@@ -23,14 +23,14 @@ export default function Pesquisar({navigation}){
 
   useEffect(() => {
     (async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      const { status } = await BarCodeScanner.requestFo();
       setHasPermission(status === 'granted');
     })();
   }, []);
   useEffect(() => {
     if(scanned==false){
     (async () => {
-      let { status } = await Location.requestPermissionsAsync();
+      let { status } = await Location.requestBackgroundPermissionsAsync();
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
         return;

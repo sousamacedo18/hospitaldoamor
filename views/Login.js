@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState,useEffect } from 'react';
 import {KeyboardAvoidingView,Image, Text, View, TextInput,TouchableOpacity, Platform,StyleSheet } from 'react-native';
 import css from "../assets/css/logincss";
-import * as LocalAuthentication from 'expo-local-authentication';
+//import * as LocalAuthentication from 'expo-local-authentication';
 
 import api from '../services/api';
 
@@ -24,9 +24,8 @@ export default function Login({navigation}){
     }
 
 
-
-
     async function logarUsuario(){
+      
         try{
             const resultado = await api.post('/logar',data);
             const mat=resultado.data.matricula;
@@ -51,6 +50,7 @@ export default function Login({navigation}){
         
 
          }catch(err){
+                console.log(err);
                  alert('Matrícula ou senha incorretos!')
                  await AsyncStorage.clear;
                  //console.log("encontramos o seguinte erro: "+err);
@@ -76,23 +76,23 @@ async function verifyLogin(){
     }
 //biometria
 }
-async function biometric(){
-  let compatible = await LocalAuthentication.hasHardwareAsync();
-  if (compatible){
-      let biometricRecords = await LocalAuthentication.isEnrolledAsync();
-      if(!biometricRecords){
-          alert('Biometria não Cadastrada');
-      }else{
-          let result=await LocalAuthentication.authenticateAsync();
-          if (result.success){
-              logarUsuario();
-          }else{
-              setMatricula(null);
-              setSenha(null);
-          }
-      }
-  } 
-}
+// async function biometric(){
+//   let compatible = await LocalAuthentication.hasHardwareAsync();
+//   if (compatible){
+//       let biometricRecords = await LocalAuthentication.isEnrolledAsync();
+//       if(!biometricRecords){
+//           alert('Biometria não Cadastrada');
+//       }else{
+//           let result=await LocalAuthentication.authenticateAsync();
+//           if (result.success){
+//               logarUsuario();
+//           }else{
+//               setMatricula(null);
+//               setSenha(null);
+//           }
+//       }
+//   } 
+// }
 
 
 
@@ -102,10 +102,10 @@ async function biometric(){
          behavior={Platform.OS=="ios" ? "padding":"height"}>
             <View style={[estilo.containerTop]} >
             <Image source={require('../assets/img/logo5.png')}
+            
             style={{ width: 300, height: 120,resizeMode:"contain" }}
             />
-               {/* <Text style={[css.login__textLogo1]}>Registro de Processos</Text> */}
-               
+     
             </View>
  
             <View style={[estilo.login__form]}>

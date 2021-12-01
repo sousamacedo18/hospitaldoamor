@@ -95,11 +95,11 @@ export default function EditarUsuario({route,navigation}){
        .then(({ data }) => {
          setData(data);
          setNome(data[0].nome);
-         setNomeunidade(data[0].nomeunidade);
-         setIdund(data[0].idund);
+         setNomeunidade(data[0].razao);
+         setNomenivel(data[0].nomenivel);
+         setNivel(data[0].nivelId);
+         setIdund(data[0].unidadeId);
          setMatricula(data[0].matricula);
-      
-      
         
        })
        .catch((error) => console.error(error))
@@ -148,8 +148,8 @@ async function salvarForm(){
     return(
 
         <View style={[estilo.container]}>
-                <MenuAreaRestrita title="Alterar Cadastro"/>
-                <View style={[estilo.formCadastro]} >
+        <MenuAreaRestrita title="Alterar Cadastro"/>
+            <View style={[estilo.formCadastro]} >
 
                     <TextInput style={[estilo.textCadastro]}
                     placeholder='Nome Usuário'
@@ -198,7 +198,7 @@ async function salvarForm(){
                     >
                     <Icon name="angle-left" size={24} color="#000" />
                     </TouchableOpacity>
-                    <Text style={[estilo.textHeader]}>Selecione a unidade</Text>
+                    <Text style={[estilo.textHeader]}>Alterar Senha</Text>
                     <TouchableOpacity
                     onPress={()=>{setVisible1(false)}}
                     >
@@ -234,10 +234,7 @@ async function salvarForm(){
                                     <Text style={{color:"#fff"}}>Confirmar</Text>
                                 </View>
                     </TouchableOpacity>
-
                     </View>
- 
-
                     </View>
                     </View>
                 </Modalsenha>
@@ -280,8 +277,7 @@ async function salvarForm(){
                                               <Text>{item.nome}</Text> 
                                               </View> 
                                        </TouchableOpacity>                        
-                                      </View>  
-                                    
+                                      </View>    
          
                                         )}
                                     />  
@@ -318,13 +314,13 @@ async function salvarForm(){
                                     
                                       <View style={[estilo.card]}>
                                         <TouchableOpacity
-                                        onPress={()=>{setNomeunidade(item.nomeunidade)}}
+                                        onPress={()=>{setNomeunidade(item.razao)}}
                                         onPress={()=>{setIdund(item.id)}}
                                         onPress={()=>{setVisible(false)}}
                                         >
                                             <View style={[estilo.interCard]}>
                                               <Text>{item.id+ " - "}</Text>                          
-                                              <Text>{item.nomeunidade}</Text> 
+                                              <Text>{item.razao}</Text> 
                                               </View> 
                                        </TouchableOpacity>                        
                                       </View>  
@@ -360,7 +356,7 @@ async function salvarForm(){
                                             </View>
                         </TouchableOpacity>
                  </View>
-                     </View>
+         </View>
             
 
      

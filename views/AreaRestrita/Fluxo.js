@@ -55,7 +55,7 @@ useEffect(()=>{
 async function buscarproduto(codigo){
     await api.get(`/produtos/cod/${codigo}`)
     .then(({ data }) => {
-      setIdTipo(data[0].idtipo);
+      setIdTipo(data[0].tipoId);
       setNome(data[0].nometipo);
       setData(data.resultado);
   
@@ -67,6 +67,7 @@ async function buscartimeline(codigo){
    await api.get(`/timeline/${codigo}`)
     .then(({ data }) => {
       setData1(data.resultado);
+      console.log(data1);
     })
     .catch((error) => console.error(error))
     .finally(() =>{});
@@ -185,12 +186,12 @@ async function escolherfluxo(){
                                 renderItem={({ item }) => (
                               
                                 <TouchableOpacity 
-                                onPress={()=>{modificarfluxo(item.id,item.nomefluxo)}}
+                                onPress={()=>{modificarfluxo(item.id,item.descricao)}}
                                 style={[estilo.cardPrincipal]}
                                       >
                             <View style={[estilo.button_escolha]}>
                                   <View style={[estilo.subButton_escolha1]}>
-                                        <Text style={[estilo.titulofluxo]}>{item.nomefluxo}</Text>
+                                        <Text style={[estilo.titulofluxo]}>{item.descricao}</Text>
      
                                   </View>
                                   <View style={[estilo.subButton_escolha2]}>
@@ -202,7 +203,8 @@ async function escolherfluxo(){
                                               type='font-awesome'
                                               color='#6495ed'
                                               size={12} />
-                                          <Text style={[estilo.subtitulos]}> {item.dias}</Text></Text>
+                                          <Text style={[estilo.subtitulos]}> 
+                                        </Text></Text>
                                           }
                                       {item.horas!==null &&
                                       <Text style={[estilo.cardHora]}>

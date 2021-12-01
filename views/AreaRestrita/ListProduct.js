@@ -90,7 +90,7 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
   <TouchableOpacity
   onPress={()=> navigation.navigate('Fluxo',{
                        
-    codigo:item.codigo,
+    codigo:item.code,
     id:item.id
 })}
 >
@@ -101,7 +101,7 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
         <View style={[]}>
             <Text >ID Paciente: {item.idpcli}</Text>
             <Text style={[estilo.text_subcardButtom]}>Descrição: {item.descricao}</Text>
-            <Text style={[estilo.text_subcardButtom]}>Qrcode:<Text> {item.codigo}</Text></Text>
+            <Text style={[estilo.text_subcardButtom]}>Qrcode:<Text> {item.code}</Text></Text>
             <Text style={[estilo.text_subcardButtom]}>Tipo: {item.nometipo}</Text>
         </View>
  
